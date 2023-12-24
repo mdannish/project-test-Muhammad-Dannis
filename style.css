@@ -1,0 +1,332 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: rgba(255, 95, 21, 0.9);
+    color: #fff;
+    text-align: center;
+    padding: 1em 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    transition: top 0.3s, background-color 0.3s;
+}
+
+header.scrolled {
+    background-color: rgba(255, 95, 21, 0.7);
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #fff;
+    margin: 0 8em;
+}
+
+.ribbon-nav {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0 8em;
+    z-index: 1;
+}
+
+.ribbon {
+    display: inline-block;
+}
+
+.ribbon a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 1em;
+    padding: 0.5em;
+    border-radius: 5px;
+    position: relative;
+}
+
+.ribbon a::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #fff;
+    transition: width 0.3s ease;
+    transform: translateX(-50%);
+  }
+
+  .ribbon a:hover::before {
+    width: 100%;
+  }
+
+.ribbon a:hover::before,
+.ribbon a.active::before {
+    width: 100%;
+}
+
+.ribbon a:hover,
+.ribbon a.active {
+    border-bottom: none;
+}
+
+.banner {
+    position: relative;
+    overflow: hidden;
+    height: 400px;
+    z-index: 2;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+.parallax {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.parallax::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(to right bottom, transparent 50%, #fff 50%);
+    z-index: 3;
+}
+
+.parallax img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    z-index: 2;
+}
+
+.banner-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    z-index: 4;
+    transition: transform 0.5s; /* Efek parallax pada teks */
+}
+
+.banner.scrolled .banner-content {
+    transform: translate(-50%, -30%);
+}
+
+#content-section {
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px; /* Mengurangi padding-top menjadi 80px */
+    margin: 0 auto; /* Menambahkan margin auto untuk menggeser ke tengah */
+    max-width: 1200px; /* Menambahkan max-width agar kontennya tidak terlalu lebar */
+}
+
+#sort-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1em 0;
+}
+
+.sort-options,
+.show-per-page-options {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.showing-info {
+    margin-right: 1em;
+}
+
+.sort-options label,
+.show-per-page-options label {
+    margin-right: 1em;
+}
+
+.options-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+.pagination-btn {
+    padding: 0.5em;
+    color: #000;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1.2em;
+    outline: none;
+    background-color: transparent;
+}
+
+.pagination-btn:hover {
+    color: #000;
+    background-color: #ff5f15;
+}
+
+.pagination-btn.active {
+    background-color: #ff5f15;
+    color: #fff;
+}
+
+
+#prev-page,
+#next-page {
+    padding: 0.5em;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1.2em; /* Ukuran font disesuaikan */
+}
+
+#prev-page:hover,
+#next-page:hover {
+    background-color: #333; /* Warna latar belakang berubah saat dihover */
+}
+
+.page-info {
+    margin: 0 1em;
+    font-weight: bold;
+}
+
+#posts-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 1em;
+}
+
+.post {
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    padding: 1em;
+    width: calc(25% - 2em);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.post .thumbnail-container {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 5px 5px 0 0;
+}
+
+.post img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post h3 {
+    margin-top: 0.5em;
+    max-height: 3em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.post p {
+    margin: 0.5em 0;
+}
+
+.post img {
+    max-width: 100%;
+    height: auto;
+}
+
+#site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.sort-options label,
+.show-per-page-options label {
+    margin-right: 0.5em;
+}
+
+select {
+    padding: 0.5em;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+}
+
+.sort-options,
+.show-per-page-options {
+    margin-left: auto;
+    margin-right: 1em;
+}
+
+.showing-info,
+.pagination {
+    margin-left: 1em;
+}
+
+#prev-page,
+#next-page {
+    padding: 0.5em 1em;
+    background-color: #ff5f15;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#prev-page:hover,
+#next-page:hover {
+    background-color: #ff5f15;
+}
+
+.page-info {
+    font-weight: bold;
+}
+
+#prev-page,
+#next-page,
+.page-number {
+    padding: 0.5em;
+    color: #000000;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1em;
+    margin: 0 0.2em;
+    background-color: transparent; /* Menambahkan background transparan secara default */
+}
+
+#prev-page:hover,
+#next-page:hover,
+.page-number:hover {
+    color: #000;
+}

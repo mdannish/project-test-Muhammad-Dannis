@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Blog</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header id="site-header">
+        <div class="logo">
+            <img src="https://suitmedia.com/_nuxt/img/logo-white.081d3ce.png" style="width: 100px;">
+        </div>
+        <nav class="ribbon-nav">
+            <div class="ribbon">
+                <a href="#work">Work</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#ideas" class="active">Ideas</a>
+                <a href="#careers">Careers</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="banner">
+        <div class="parallax">
+            <img src="./banner.jpg" alt="Banner Image" id="banner-image">
+        </div>
+        <div class="banner-content">
+            <h2>Ideas</h2>
+            <p>Where all our great things begin</p>
+        </div>
+    </section>
+
+    <section id="content-section">
+        <section id="sort-section">
+            <span class="showing-info">Showing 1 - 10 of 100</span>
+            <div class="options-container">
+                <div class="show-per-page-options">
+                    <label for="show-per-page">Show per page:</label>
+                    <select id="show-per-page">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+                <div class="sort-options">
+                    <label for="sort-select">Sort by:</label>
+                    <select id="sort-select">
+                        <option value="latest">Latest</option>
+                        <option value="oldest">Oldest</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <section id="posts-section">
+            <!-- Post items will be dynamically added here -->
+        </section>
+
+        <section class="pagination">
+            <button id="prev-page" class="pagination-btn">&lt;&lt;</button>
+            <div id="page-numbers" class="page-numbers"></div>
+            <button id="next-page" class="pagination-btn">&gt;&gt;</button>
+        </section>
+
+
+        <script src="script.js"></script>
+</body>
+
+</html>
