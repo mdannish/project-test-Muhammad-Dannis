@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
         { id: 12, title: "Post 12", imageUrl: "https://static.bhphotovideo.com/explora/sites/default/files/Gift-Guide-for-Content-Creators-ts.jpg", date: "2023-06-01" },
         { id: 13, title: "Post 13", imageUrl: "https://riseuplabs.com/wp-content/uploads/2022/05/social-media-app-development-article-inner-thumbnail.jpg", date: "2023-05-01" },
         { id: 14, title: "Post 14", imageUrl: "https://static.bhphotovideo.com/explora/sites/default/files/Gift-Guide-for-Content-Creators-ts.jpg", date: "2023-06-01" },
-        // Add more posts as needed
+        // ... (data post lainnya)
     ];
 
     // Fungsi untuk menampilkan nomor halaman
@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function () {
             pageNumbersContainer.appendChild(pageNumber);
         }
     }
-
 
     const sortSelect = document.getElementById("sort-select");
     const showPerPageSelect = document.getElementById("show-per-page");
@@ -107,19 +106,20 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function updateShowingInfo(totalPosts) {
-    const startIndex = (currentPage - 1) * postsPerPage + 1;
-    const endIndex = Math.min(startIndex + postsPerPage - 1, totalPosts);
-    const showingInfo = `Showing ${startIndex} - ${endIndex} of ${totalPosts}`;
-    document.querySelector('.showing-info').textContent = showingInfo;
+        const startIndex = (currentPage - 1) * postsPerPage + 1;
+        const endIndex = Math.min(startIndex + postsPerPage - 1, totalPosts);
+        const showingInfo = `Showing ${startIndex} - ${endIndex} of ${totalPosts}`;
+        document.querySelector('.showing-info').textContent = showingInfo;
 
-    window.addEventListener('scroll', function () {
-        var scrollPosition = window.scrollY;
-        banner.style.backgroundPositionY = -scrollPosition * 0.5 + 'px';
-        bannerContent.style.transform = 'translate(-50%, ' + scrollPosition * 0.2 + 'px)';
-    });
+        window.addEventListener('scroll', function () {
+            var scrollPosition = window.scrollY;
+            banner.style.backgroundPositionY = -scrollPosition * 0.5 + 'px';
+            bannerContent.style.transform = 'translate(-50%, ' + scrollPosition * 0.2 + 'px)';
+        });
+    }
 
     async function fetchData() {
-        const proxyUrl = "https://cors-anywhere.herokuapp.com"; // Ganti dengan URL proxy Anda
+        const proxyUrl = "https://cors-anywhere.herokuapp.com";
         const apiUrl = "https://suitmedia-backend.suitdev.com/api/ideas";
         const params = {
             "page[number]": currentPage,
@@ -138,56 +138,44 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             const response = await fetch(urlThroughProxy);
             const data = await response.json();
-            posts = data.data; // Simpan data post yang diambil dari API
+            posts = data.data;
             return posts;
         } catch (error) {
             console.error("Error fetching data:", error);
         }
     }
-    fetchData().then(() => {
-        handlePageChange();
-    });
-}
-    
 
     function handlePageChange() {
-        console.log("Current Page:", currentPage);
-        console.log("Posts Per Page:", postsPerPage);
-        console.log("Selected Sort:", selectedSort);
-    
         localStorage.setItem("currentPage", currentPage);
         localStorage.setItem("postsPerPage", postsPerPage);
         localStorage.setItem("selectedSort", selectedSort);
-    
+
         const sortedPosts = sortPosts(posts, selectedSort);
         const startIndex = (currentPage - 1) * postsPerPage;
         const endIndex = startIndex + postsPerPage;
-    
-        console.log("Start Index:", startIndex);
-        console.log("End Index:", endIndex);
-        
+
         const postsToShow = sortedPosts.slice(startIndex, endIndex);
         renderPosts(postsToShow);
-    
-        // Menampilkan nomor halaman
+
         const totalPages = calculateTotalPages();
-        console.log("Total Pages:", totalPages);
-        renderPageNumbers(totalPages); // Panggil fungsi renderPageNumbers di sini
+        renderPageNumbers(totalPages);
         updateShowingInfo(sortedPosts.length);
     }
-    
+
     // Initial render
-    
+    fetchData().then(() => {
+        handlePageChange();
+    });
 
     // Event listeners
     sortSelect.addEventListener("change", function () {
-        currentPage = 1; // Reset ke halaman pertama ketika mengubah pengurutan
+        currentPage = 1;
         selectedSort = sortSelect.value;
         handlePageChange();
     });
 
     showPerPageSelect.addEventListener("change", function () {
-        currentPage = 1; // Reset ke halaman pertama ketika mengubah jumlah tampilan per halaman
+        currentPage = 1;
         postsPerPage = parseInt(showPerPageSelect.value, 10);
         handlePageChange();
     });
